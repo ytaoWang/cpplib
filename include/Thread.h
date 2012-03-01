@@ -14,6 +14,7 @@
 #include <pthread.h>
 
 class MidServer;
+class Scheduler;
 
 class Thread 
 {
@@ -23,7 +24,7 @@ class Thread
    * @param pMidServer:when this unit need a work,
    * so ask midserver for it 
    */
-  Thread(MidServer *pMidServer);
+  Thread(MidServer *pMidServer,bool checked=false,Scheduler *pScheduler);
   /** 
    * pthread execute function
    * 
@@ -39,7 +40,20 @@ class Thread
    * 
    * @return current thread status
    */
-  unsigned int getStatus(void) const{return m_iStatus};
+  unsigned int getStatus(void) const{
+    	return __sync_fetch_and_add(&m_iStatus,0)
+      };
+
+  /** 
+   * return current thread id
+   * 
+   * 
+   * @return thread id
+   */
+  pthread_t getTid(void) const
+  {
+    return m_tid;
+  }
   
   /** 
    * 
@@ -48,14 +62,23 @@ class Thread
    * 
    */
   void setStatus(unsigned int status);
+
+  ~Thread(void);
   
  private:
+  
+  //if scheduler don't afford to adjust threadpool size,so do itself.
+  void __checked(void);
+  
   /// main for get a product and consume then write back
   MidServer* m_pMidServer;
   /// current thread status
   unsigned int m_iStatus;
+  /// current thread it
   pthread_t m_tid;
-  
+  /// did the scheduler check the thread status?
+  bool checked;
+  Scheduler *m_pScheduler;
 };
 
 
