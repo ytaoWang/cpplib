@@ -1,0 +1,12 @@
+#ifndef __CLIENT_AGENT_H__
+#define __CLIENT_AGENT_H__
+
+class ClientAgent:public Agent
+{
+
+
+};
+
+
+
+#endif

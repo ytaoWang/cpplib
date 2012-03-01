@@ -1,0 +1,15 @@
+#ifndef __EVENT_H__
+#define __EVENT_H__
+
+#include <sys/epoll.h>
+
+/// TIMER event definition once
+const unsigned int EVENT_TIMER_ONCE = 0x00000001;
+/// TIMER event again
+const unsigned int EVENT_TIMER_AGAIN = 0x00000010;
+
+/// ALWAYS event
+const unsigned int EVENT_ALWAYS = 0x00000100;
+
+
+#endif

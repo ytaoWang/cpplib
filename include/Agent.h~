@@ -1,0 +1,15 @@
+#ifndef __AGENT_H__
+#define __AGENT_H__
+
+class Agent
+{
+ public:
+  virtual int sendData();
+  virtual int recvData();
+  virtual int doAction();
+  virtual int doAlways();
+  virtual int doDestroy();
+};
+
+
+#endif
