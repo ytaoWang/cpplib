@@ -13,14 +13,14 @@
 #ifndef __MIDSERVER_H__
 #define __MIDSERVER_H__
 
-class Task;
+class WokItem;
 class MidServer {
  public:
   /** 
    * this function is for thread to get a Task
    * @return task
    */
-  virtual Task* getTask()=0;
+  virtual WorkItem* getTask()=0;
   /** 
    * when upper thread want threadpool to execute a task,it calls 
    * this function to add task
@@ -29,7 +29,7 @@ class MidServer {
    * 
    * @return fail(-1) or successful(0)
    */
-  virtual int setTask(Task * task)=0;
+  virtual int setTask(WorkItem * task)=0;
   /** 
    * 
    * when the MidServer is imbalance or other,then you can call this to
